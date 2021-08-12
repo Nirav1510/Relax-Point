@@ -4,6 +4,10 @@ import { Container } from "@material-ui/core";
 import './App.css'
 import Header from "./components/Header/Header";
 import MainNav from "./components/MainNav";
+import Trending from "./pages/Trending/Trending";
+import Series from "./pages/Series/Series";
+import Movies from "./pages/Movies/Movies";
+import Search from "./pages/Search/Search";
 
 const App = () => {
   return (
