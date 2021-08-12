@@ -1,13 +1,14 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import './App.css'
+import Header from "./components/Header/Header";
 
 const App = () => {
   return (
-    <div>
-      movie app
-      <h1 className="text-right text-4xl">Hello</h1>
-    </div>
+    <React.Fragment>
+      <Header />
+      <div className="app">random</div>
+    </React.Fragment>
   );
-}
+};
 
 export default App;
