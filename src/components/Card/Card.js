@@ -8,10 +8,10 @@ const Card = ({ id, poster, title, date, media_type, vote_average }) => {
     <div className="media">
       <Badge badgeContent={vote_average} color={(vote_average>7) ? "primary" : "secondary"} />
       <img className="poster" src={poster ? `${img_300}/${poster}` : unavailable} alt={title} />
-      <b>{title}</b>
-      <span className="sunTitle">
+      <b className="title">{title}</b>
+      <span className="subTitle">
         {media_type === "tv" ? "TV-Series" : "Movie"}
-        <span className="sunTitle">{date}</span>
+        <span className="subTitle">{date}</span>
       </span>
     </div>
   );

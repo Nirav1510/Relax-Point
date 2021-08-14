@@ -17,12 +17,13 @@ const Trending = () => {
 
   useEffect(() => {
     fetchTrending();
+    // eslint-disable-next-line
   }, [page]);
 
   return (
     <div>
       <span className="pageTitle">Trending</span>
-      <div className="flex justify-around flex-wrap">
+      <div className="flex flex-wrap justify-around">
         {content &&
           content.map((c) => (
             <Card
