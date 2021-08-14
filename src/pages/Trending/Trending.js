@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Card from "../../components/Card/Card";
+import Pagination from "../../components/Pagination/Pagination";
 
 const Trending = () => {
   const [content, setContent] = useState([]);
@@ -34,6 +35,7 @@ const Trending = () => {
             />
           ))}
       </div>
+      <Pagination/>
     </div>
   );
 };
