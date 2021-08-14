@@ -17,7 +17,7 @@ const Trending = () => {
 
   useEffect(() => {
     fetchTrending();
-  }, []);
+  }, [page]);
 
   return (
     <div>
@@ -36,7 +36,7 @@ const Trending = () => {
             />
           ))}
       </div>
-      <BottomPagination setPage={setPage}/>
+      <BottomPagination setPage={setPage} />
     </div>
   );
 };
