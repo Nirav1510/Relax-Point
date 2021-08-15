@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   createTheme,
@@ -8,6 +8,7 @@ import {
   ThemeProvider,
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
+import axios from "axios";
 
 const Search = () => {
   const [type, setType] = useState(0);
@@ -25,6 +26,24 @@ const Search = () => {
     },
   });
 
+  const fetchSearch = async () => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/search/${type ? "tv" : "movie"}?api_key=${
+        process.env.REACT_APP_API_KEY
+      }&language=en-US&query=${searchText}&page=${page}&include_adult=false`
+    );
+
+    console.log(data);
+    setContent(data.results);
+    setNumOfPages(data.total_pages);
+  };
+
+  useEffect(() => {
+    window.scroll(0, 0);
+    fetchSearch();
+    // eslint-disable-next-line
+  }, [type, page]);
+
   return (
     <div>
       <ThemeProvider theme={darkTheme}>
@@ -34,13 +53,12 @@ const Search = () => {
             className="searchBox"
             label="Search"
             variant="filled"
-            //onChange={(e) => setSearchText(e.target.value)}
+            onChange={(e) => setSearchText(e.target.value)}
           />
           <Button
             //onClick={fetchSearch}
             variant="contained"
             style={{ marginLeft: 10 }}
-            //className="ml-20"
           >
             <SearchIcon fontSize="large" />
           </Button>
