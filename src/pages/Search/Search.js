@@ -35,9 +35,9 @@ const Search = () => {
       }&language=en-US&query=${searchText}&page=${page}&include_adult=false`
     );
 
-    console.log(data);
     setContent(data.results);
     setNumOfPages(data.total_pages);
+    //console.log(data.results);
   };
 
   useEffect(() => {
