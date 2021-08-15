@@ -14,7 +14,6 @@ import YouTubeIcon from "@material-ui/icons/YouTube";
 import "./ContentModal.css";
 import Carousel from '../Carousel/Carousel'
 
-
 const useStyles = makeStyles((theme) => ({
   modal: {
     display: "flex",
