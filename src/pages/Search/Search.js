@@ -11,6 +11,10 @@ import SearchIcon from "@material-ui/icons/Search";
 
 const Search = () => {
   const [type, setType] = useState(0);
+  const [searchText, setSearchText] = useState("");
+  const [page, setPage] = useState(1);
+  const [content, setContent] = useState([]);
+  const [numOfPages, setNumOfPages] = useState();
 
   const darkTheme = createTheme({
     palette: {
@@ -41,6 +45,19 @@ const Search = () => {
             <SearchIcon fontSize="large" />
           </Button>
         </div>
+        <Tabs
+          value={type}
+          indicatorColor="primary"
+          textColor="primary"
+          onChange={(event, newValue) => {
+            setType(newValue);
+            setPage(1);
+          }}
+          className="pb-5"
+        >
+          <Tab className="w-1/2" label="Search Movies" />
+          <Tab className="w-1/2" label="Search TV Series" />
+        </Tabs>
       </ThemeProvider>
     </div>
   );
