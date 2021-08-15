@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import BottomPagination from "../../components/Pagination/BottomPagination";
 import Card from "../../components/Card/Card";
+import Genres from "../../components/Genres";
 
 const Movies = () => {
   const [page, setPage] = useState(1);
   const [content, setContent] = useState([]);
   const [numOfPages, setNumOfPages] = useState();
-  const [selectedGeners, setSelectedGeners] = useState([])
-  const [geners, setGeners] = useState([])
+  const [genres, setGenres] = useState([]);
+  const [selectedGenres, setSelectedGenres] = useState([]);
 
   const fetchMovies = async () => {
     const { data } = await axios.get(
@@ -21,12 +22,23 @@ const Movies = () => {
   };
 
   useEffect(() => {
+    window.scroll(0, 0);
     fetchMovies();
+    // eslint-disable-next-line
   }, [page]);
+
 
   return (
     <div>
       <span className="pageTitle">Movies</span>
+      <Genres
+        type="movie"
+        selectedGenres={selectedGenres}
+        setSelectedGenres={setSelectedGenres}
+        genres={genres}
+        setGenres={setGenres}
+        setPage={setPage}
+      />
       <div className="flex justify-around flex-wrap">
         {content &&
           content.map((c) => (
