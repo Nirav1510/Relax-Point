@@ -49,7 +49,7 @@ const Search = () => {
   return (
     <div>
       <ThemeProvider theme={darkTheme}>
-        <div className="flex mx-0 my-4">
+        <div className="flex my-0 mx-4">
           <TextField
             style={{ flex: 1 }}
             className="searchBox"

@@ -25,14 +25,14 @@ export default function MainNav() {
 
   useEffect(() => {
     switch (value) {
-      case 0:
-        return history.push("/");
       case 1:
         return history.push("/movies");
       case 2:
         return history.push("/series");
       case 3:
         return history.push("/search");
+      default:
+        return history.push("/");
     }
   }, [value, history]);
 
