@@ -11,7 +11,9 @@ import {
 } from "../../config/config";
 import { Button } from "@material-ui/core";
 import YouTubeIcon from "@material-ui/icons/YouTube";
-import './ContentModal.css'
+import "./ContentModal.css";
+import Carousel from '../Carousel/Carousel'
+
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -68,7 +70,7 @@ export default function ContentModal({ children, media_type, id }) {
 
   return (
     <React.Fragment>
-       <div
+      <div
         className="media"
         style={{ cursor: "pointer" }}
         color="inherit"
@@ -128,8 +130,7 @@ export default function ContentModal({ children, media_type, id }) {
                     {content.overview}
                   </span>
                   <div>
-
-
+                    <Carousel id={id} media_type={media_type} />
                   </div>
                   <Button
                     variant="contained"
