@@ -1,3 +1,4 @@
+import { Chip } from "@material-ui/core";
 import axios from "axios";
 import React, { useEffect } from "react";
 
@@ -15,7 +16,6 @@ const Genres = ({
     );
     setGenres(data.genres);
   };
-  console.log(genres);
 
   useEffect(() => {
     fetchGenres();
@@ -26,7 +26,20 @@ const Genres = ({
     // eslint-disable-next-line
   }, []);
 
-  return <div>Hello</div>;
+  return (
+    <div className="mx-1 my-0">
+      {genres.map((genre) => (
+        <Chip
+          style={{ margin: 2 }}
+          label={genre.name}
+          key={genre.id}
+          clickable
+          size="small"
+          //onClick={() => handleAdd(genre)}
+        />
+      ))}
+    </div>
+  );
 };
 
 export default Genres;
