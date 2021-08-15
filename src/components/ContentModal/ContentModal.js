@@ -1,26 +1,33 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
+import React, { useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Modal from "@material-ui/core/Modal";
+import Backdrop from "@material-ui/core/Backdrop";
+import Fade from "@material-ui/core/Fade";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
   paper: {
-    backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
+    width: "90%",
+    height: "80%",
+    backgroundColor: "#39445a",
+    border: "1px solid #282c34",
+    borderRadius: 10,
+    color: "white",
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    padding: theme.spacing(1, 1, 3),
   },
 }));
 
-export default function ContentModal() {
+export default function ContentModal({ children, media_type, id }) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [content, setContent] = useState();
+  const [video, setVideo] = useState();
 
   const handleOpen = () => {
     setOpen(true);
@@ -30,10 +37,25 @@ export default function ContentModal() {
     setOpen(false);
   };
 
+  const fetchData = async () => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/${media_type}/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
+    );
+    setContent(data);
+    console.log(data);
+  };
+
+  const fetchVideo = async () => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/${media_type}/${id}/videos?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
+    );
+    setVideo(data.results[0]?.key);
+  };
+
   return (
     <div>
-      <button type="button" onClick={handleOpen}  className="media">
-        react-transition-group
+      <button type="button" onClick={handleOpen} className="media">
+        {children}
       </button>
       <Modal
         aria-labelledby="transition-modal-title"
@@ -50,7 +72,9 @@ export default function ContentModal() {
         <Fade in={open}>
           <div className={classes.paper}>
             <h2 id="transition-modal-title">Transition modal</h2>
-            <p id="transition-modal-description">react-transition-group animates me.</p>
+            <p id="transition-modal-description">
+              react-transition-group animates me.
+            </p>
           </div>
         </Fade>
       </Modal>
