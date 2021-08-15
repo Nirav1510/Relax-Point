@@ -7,6 +7,8 @@ const Movies = () => {
   const [page, setPage] = useState(1);
   const [content, setContent] = useState([]);
   const [numOfPages, setNumOfPages] = useState();
+  const [selectedGeners, setSelectedGeners] = useState([])
+  const [geners, setGeners] = useState([])
 
   const fetchMovies = async () => {
     const { data } = await axios.get(
