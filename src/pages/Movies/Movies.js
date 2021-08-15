@@ -3,6 +3,7 @@ import axios from "axios";
 import BottomPagination from "../../components/Pagination/BottomPagination";
 import Card from "../../components/Card/Card";
 import Genres from "../../components/Genres";
+import useGenre from "../../hooks/useGenre";
 
 const Movies = () => {
   const [page, setPage] = useState(1);
@@ -10,10 +11,11 @@ const Movies = () => {
   const [numOfPages, setNumOfPages] = useState();
   const [genres, setGenres] = useState([]);
   const [selectedGenres, setSelectedGenres] = useState([]);
+  const genreforURL = useGenre(selectedGenres);
 
   const fetchMovies = async () => {
     const { data } = await axios.get(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}`
+      `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreforURL}`
     );
     //console.log(data);
 
@@ -25,7 +27,7 @@ const Movies = () => {
     window.scroll(0, 0);
     fetchMovies();
     // eslint-disable-next-line
-  }, [page]);
+  }, [page, genreforURL]);
 
 
   return (
