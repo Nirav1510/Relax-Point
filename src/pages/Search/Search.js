@@ -9,6 +9,8 @@ import {
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import axios from "axios";
+import Card from "../../components/Card/Card";
+import BottomPagination from "../../components/Pagination/BottomPagination";
 
 const Search = () => {
   const [type, setType] = useState(0);
@@ -56,9 +58,9 @@ const Search = () => {
             onChange={(e) => setSearchText(e.target.value)}
           />
           <Button
-            //onClick={fetchSearch}
             variant="contained"
             style={{ marginLeft: 10 }}
+            onClick={fetchSearch}
           >
             <SearchIcon fontSize="large" />
           </Button>
@@ -77,6 +79,26 @@ const Search = () => {
           <Tab className="w-1/2" label="Search TV Series" />
         </Tabs>
       </ThemeProvider>
+      <div className="flex justify-around flex-wrap">
+        {content &&
+          content.map((c) => (
+            <Card
+              key={c.id}
+              id={c.id}
+              poster={c.poster_path}
+              title={c.title || c.name}
+              date={c.first_air_date || c.release_date}
+              media_type={type ? "tv" : "movie"}
+              vote_average={c.vote_average}
+            />
+          ))}
+        {searchText &&
+          !content &&
+          (type ? <h2>No Series Found</h2> : <h2>No Movies Found</h2>)}
+      </div>
+      {numOfPages > 1 && (
+        <BottomPagination setPage={setPage} numOfPages={numOfPages} />
+      )}
     </div>
   );
 };
